@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Rock Paper Scissors Game</title>
+</head>
+<body>
+    <script>
+
+        /* Player input choices */
+        const choices = ["rock", "paper", "scissors"];
+
+        /* Set all scores to zero */
+        let score = { player: 0, computer: 0, rounds: 0 };
+
+
+        /* Computer plays */
+        function computerPlay() {
+
+            let choice = choices[Math.floor(Math.random() * choices.length)];
+            return choice;
+
+        }
+
+       /* Player plays */
+        function playerPlay(message) {
+
+            /* Start with no choice */
+            let choice = "";
+
+            if (message === undefined || message === null)
+
+                choice = prompt("Please type one of the following: Rock, Paper, or Scissors").toLowerCase();
+
+            else
+
+                choice = prompt(message).toLowerCase();
+
+            if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
+
+                return playerPlay("Your ichoice \"" + choice + "\" is invalid.  Please type one of the following: Rock, Paper, or Scissors");
+            }
+
+            return choice;
+        }
+
+        /* Play round */
+        function playRound(playerSelection, computerSelection) {
+
+            if (playerSelection == computerSelection)
+
+                return { winner: "none", message: "It's a draw!" }
+
+            else if (playerSelection == "rock")
+
+                if (computerSelection == "scissors")
+
+                    return { winner: "player", message: "You win! Rock beats scissors" };
+
+                else
+                    return { winner: "computer", message: "You lose! Paper beats rock" };
+
+            else if (playerSelection == "paper")
+
+                return { winner: "player", message: "You win! Scissors beats paper" };
+
+            else
+
+                return { winner: "computer", message: "You lose! Rock beats scissors" };
+
+        }
+
+        function updateScore(winner) {
+
+            if (winner == "player")
+
+                score.player = score.player + 1;
+
+            else if (winner == "computer")
+
+                score.cpu = score.computer + 1;
+
+            score.rounds = score.rounds + 1;
+
+            return true;
+
+        }
+
+        function finalResult() {
+
+            let result;
+
+
+            if (score.player > score.computer)
+
+                result = "Congradulation! you won this game!";
+
+            else if (score.player < score.computer)
+
+                result = "The computer won the game!";
+
+            else
+
+                result = "It's a draw!";
+
+            return result;
+        }
+
+        function resetScore() {
+
+            score.player = 0;
+            score.computer = 0;
+            score.rounds = 0;
+        }
+
+        function game(gui = false, maxRounds = 5) {
+
+            if (gui == false) {
+
+                resetScore();
+
+                for (let gameRounds = 0; gameRounds < maxRounds; gameRounds++) {
+                    let playerSelection = playerPlay();
+                    let computerSelection = computerPlay();
+                    let round = playRound(playerSelection, computerSelection);
+
+                    updateScore(round.winner);
+
+                    console.log({ message: round.message, playerScore: score.player, computerScore: score.computer });
+                }
+                return finalResult();
+                
+            }else if (gui == true) {
+
+                let round;
+
+                const buttons = document.querySelectorAll('button');
+                const output = document.querySelector(' .out');
+                const scores = document.querySelectorAll('.score > span');
+
+                buttons.forEach(button =>
+
+                    button.addEventLister("click", (e) => {
+
+                        if (score.rounds == 0) output.innerHTML = "";
+
+                        round = (e.target.id == "") ? playRound(e.target.parentElement.id, computerPlay()) : playRound(e.target.id, computerPlay());
+
+                        updtateScore(round.winner);
+
+                        console.log({ message: round.message, playerScore: score.player, computerScore: score.cpu });
+
+                        scores[0].innerHTML = score.player;
+                        scores[1].innerHTML = score.computer;
+                        output.innerHTML += round.message + '<br />';
+
+                        if (score.rounds === maxRounds) {
+
+                            output.innerHTML += `<b> Final Result: ${finalResult()} </b> <br />`;
+                            resetScore();
+                        }
+                    }
+                    ));
+                    
+
+            }
+   
+
+
+          
+        }
+
+
+    </script>
+
+</body>
+</html>
