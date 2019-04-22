@@ -70,6 +70,7 @@
 
         }
 
+        /* Record and update scores */
         function updateScore(winner) {
 
             if (winner == "player")
@@ -86,6 +87,7 @@
 
         }
 
+        /* Finalise score and announce winner */
         function finalResult() {
 
             let result;
@@ -106,6 +108,7 @@
             return result;
         }
 
+        /* Clear score for next round of game */
         function resetScore() {
 
             score.player = 0;
@@ -113,6 +116,7 @@
             score.rounds = 0;
         }
 
+        /* Main game */
         function game(gui = false, maxRounds = 5) {
 
             if (gui == false) {
