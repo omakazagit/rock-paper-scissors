@@ -28,13 +28,14 @@
             /* Start with no choice */
             let choice = "";
 
-            if (message === undefined || message === null)
+            if (message === undefined || message === null) {
 
                 choice = prompt("Please type one of the following: Rock, Paper, or Scissors").toLowerCase();
-
-            else
+            }
+            else {
 
                 choice = prompt(message).toLowerCase();
+            }
 
             if (choice !== "rock" && choice !== "paper" && choice !== "scissors") {
 
@@ -47,27 +48,30 @@
         /* Play round */
         function playRound(playerSelection, computerSelection) {
 
-            if (playerSelection == computerSelection)
+            if (playerSelection == computerSelection) {
 
                 return { winner: "none", message: "It's a draw!" }
+            }
+            else if (playerSelection == "rock") {
 
-            else if (playerSelection == "rock")
-
-                if (computerSelection == "scissors")
+                if (computerSelection == "scissors") {
 
                     return { winner: "player", message: "You win! Rock beats scissors" };
+                }
+            }
 
-                else
-                    return { winner: "computer", message: "You lose! Paper beats rock" };
+            else {
+                return { winner: "computer", message: "You lose! Paper beats rock" };
+            }
 
-            else if (playerSelection == "paper")
+            else if (playerSelection == "paper") {
 
                 return { winner: "player", message: "You win! Scissors beats paper" };
-
-            else
+            }
+            else {
 
                 return { winner: "computer", message: "You lose! Rock beats scissors" };
-
+            }
         }
 
         /* Record and update scores */
@@ -93,17 +97,20 @@
             let result;
 
 
-            if (score.player > score.computer)
+            if (score.player > score.computer) {
 
                 result = "Congradulation! you won this game!";
+            }
 
-            else if (score.player < score.computer)
+            else if (score.player < score.computer) {
 
                 result = "The computer won the game!";
+            }
 
-            else
+            else {
 
                 result = "It's a draw!";
+            }
 
             return result;
         }
