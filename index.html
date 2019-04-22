@@ -5,6 +5,24 @@
     <title>Rock Paper Scissors Game</title>
 </head>
 <body>
+
+    <button id="game-rps" onclick="game()">Play: Rock Paper Scissors</button>
+
+
+    <style>
+        #game-rps {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: green;
+            color: white;
+            font-size: 16px;
+            border: solid 2px;
+            font-weight: bold;
+            padding: 10px;
+            text-align: center;
+        }
+    
+    </style>
+
     <script>
 
         /* Player input choices */
@@ -138,7 +156,8 @@
 
                     console.log({ message: round.message, playerScore: score.player, computerScore: score.computer });
                 }
-                return finalResult();
+                let displayWinner;
+                return displayWinner = window.prompt(finalResult());
                 
             }else if (gui == true) {
 
